@@ -50,9 +50,9 @@ class CrmGo extends Crm {
 			$this->Mview->error("before: $loginEmail: Eh?");
 			return;
 		}
-		$this->Mview->register_modifier("userName", array("Crm", "userName",));
-		$this->Mview->register_modifier("tagName", array("Crm", "tagName",));
-		$this->Mview->register_modifier("numAssigned", array("Crm", "numAssigned",));
+		$this->Mview->register_modifier("userName", array("CrmGo", "userName",));
+		$this->Mview->register_modifier("tagName", array("CrmUtils", "tagName",));
+		$this->Mview->register_modifier("numAssigned", array("CrmGo", "numAssigned",));
 		$args = array(
 			'userId' => $this->userId,
 			'userName' => $this->userName,

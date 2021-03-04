@@ -67,7 +67,7 @@ class Crm extends Mcontroller {
 	/*------------------------------------------------------------*/
 	public function index() {
 		if ( $this->loginId )
-			Mview::print_r($_REQUEST, "_REQUEST", basename(__FILE__), __LINE__, null, false);
+			$this->redirect("/crmGo");
 		else
 			$this->Mview->showTpl("login.tpl");
 	}
