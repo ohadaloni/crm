@@ -6,7 +6,8 @@ class Crm extends Mcontroller {
 	protected $loginId;
 	protected $role;
 	/*------------------------------*/
-	protected $project;
+	protected $logger;
+	protected $crmUtils;
 	/*------------------------------*/
 	protected $Mmemcache;
 	/*------------------------------*/
@@ -15,14 +16,17 @@ class Crm extends Mcontroller {
 	public function __construct() {
 		parent::__construct();
 
-		$crmLogin = new CrmLogin;
+		$topDir = dirname(__DIR__);
+		$logsDir = "$topDir/logs/crm";
+		$today = date("Y-m-d");
+		$logFileName = "crm.$today.log";
+		$logFile = "$logsDir/$logFileName";
 		$this->loginId = CrmLogin::loginId();
 		$this->loginEmail = CrmLogin::loginEmail();
 		$this->role = CrmLogin::role();
-		$this->project = @$_COOKIE['project'];
-
+		$this->crmUtils = new CrmUtils($logFile);
 		$this->Mmemcache = new Mmemcache;
-		Mutils::setenv("debugLevel", 1);
+		$this->logger = new Logger($logFile);
 	}
 	/*------------------------------------------------------------*/
 	/*------------------------------------------------------------*/
@@ -51,7 +55,7 @@ class Crm extends Mcontroller {
 			$this->Mview->assign("RE_CAPTACH_SITE_KEY", RE_CAPTACH_SITE_KEY);
 			if ( $this->loginId ) {
 				$menu = new Menu();
-				$menu->index($this->project);
+				$menu->index();
 			}
 			$this->Mview->showMsgs();
 		}
