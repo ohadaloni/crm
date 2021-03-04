@@ -13,5 +13,17 @@ class CrmUtils extends Mcontroller {
 		return($name);
 	}
 	/*------------------------------------------------------------*/
+	public function countries() {
+		$sql = "select * from countries order by name";
+		$countries = $this->Mmodel->getRows($sql, 24*3600);
+		return($countries);
+	}
+	/*------------------------------------------------------------*/
+	public function countryName($countryCode) {
+		$sql = "select name from countries where code = '$countryCode";
+		$countryName = $this->Mmodel->getString($sql, 24*3600);
+		return(@$countries[$countryCode]);
+	}
+	/*------------------------------------------------------------*/
 }
 /*------------------------------------------------------------*/
