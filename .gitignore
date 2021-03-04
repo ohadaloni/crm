@@ -1,3 +1,4 @@
 tmp
 logs
 src/smarty
+src/crmConfig.php
