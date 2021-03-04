@@ -62,7 +62,7 @@ class CrmGo extends Crm {
 			'mgrId' => $this->mgrId,
 			'mgrName' => $this->mgrName,
 			'priorities' => $this->priorities,
-			'countries' => $this->tasUtils->countries(),
+			'countries' => $this->crmUtils->countries(),
 			'myAssignees' => $this->myAssignees(),
 		);
 		$this->Mview->assign($args);
@@ -906,7 +906,7 @@ class CrmGo extends Crm {
 	/*------------------------------------------------------------*/
 	private function crmUser() {
 		$loginId = $this->loginId;
-		$sql = "select * from users where loginId = '$loginId'";
+		$sql = "select * from users where id = '$loginId'";
 		$crmUser = $this->Mmodel->getRow($sql);
 		return($crmUser);
 	}
