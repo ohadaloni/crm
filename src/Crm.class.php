@@ -9,8 +9,6 @@ class Crm extends Mcontroller {
 	protected $logger;
 	protected $crmUtils;
 	/*------------------------------*/
-	protected $Mmemcache;
-	/*------------------------------*/
 	private $startTime;
 	/*------------------------------------------------------------*/
 	public function __construct() {
@@ -25,7 +23,6 @@ class Crm extends Mcontroller {
 		$this->loginEmail = CrmLogin::loginEmail();
 		$this->role = CrmLogin::role();
 		$this->crmUtils = new CrmUtils($logFile);
-		$this->Mmemcache = new Mmemcache;
 		$this->logger = new Logger($logFile);
 	}
 	/*------------------------------------------------------------*/
