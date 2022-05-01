@@ -11,8 +11,7 @@
 	<tr class="snRow">
 		<td>Country</td>
 		<td>
-			{msuShowTpl file="select.tpl" listRows=$countries
-				varName="countryCode" varValue=$contact.countryCode}
+			{msuShowTpl file="select.tpl" from=$countries name="countryCode" selected=$contact.countryCode}
 		</td>
 	</tr>
 	<tr class="snRow">
