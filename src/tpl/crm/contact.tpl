@@ -180,7 +180,7 @@
 {/if}
 {****************************************************************}
 <br />
-<form method="post" class="validateForm" action="/crmGo/comment">
+<form method="post" action="/crmGo/comment">
 <table border="0">
 	<tr class="snHeaderRow">
 		<td>Add a Comment:</td>

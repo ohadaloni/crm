@@ -1,5 +1,5 @@
 <br />
-<form method="post" class="validateForm" action="/crmGo/qualiPhone">
+<form method="post" action="/crmGo/qualiPhone">
 <table border="0">
 	<tr class="snHeaderRow">
 		<td>Qualify Phone Number (India)</td>

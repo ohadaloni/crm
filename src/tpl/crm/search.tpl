@@ -1,4 +1,4 @@
-<form method="get" class="validateForm" action="/crmGo/search">
+<form method="get" action="/crmGo/search">
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
