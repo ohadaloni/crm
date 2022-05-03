@@ -1,5 +1,5 @@
 <br />
-<form method="post" class="validateForm" action="/crmGo/newContact">
+<form method="post" action="/crmGo/newContact">
 <table border="0">
 	<tr class="snHeaderRow">
 		<td colspan="2">New Contact</td>
