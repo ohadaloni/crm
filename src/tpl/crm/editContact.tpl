@@ -1,5 +1,5 @@
 <br />
-<form method="post" class="validateForm" action="/crmGo/editContact">
+<form method="post" action="/crmGo/editContact">
 <table border="0">
 	<tr class="snHeaderRow">
 		<td colspan="2">Update Contact Information</td>
