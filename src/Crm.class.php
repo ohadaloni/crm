@@ -91,7 +91,7 @@ class Crm extends Mcontroller {
 		$sha1 = sha1($rnd);
 		$passwd = substr($sha1, 17, 6);
 		$dbPasswd = sha1($passwd);
-		$this->dbUpdate("users", $loginRow['id'], array(
+		$this->Mmodel->dbUpdate("users", $loginRow['id'], array(
 			'passwd' => $dbPasswd,
 		));
 		$m = new MmailJet;
