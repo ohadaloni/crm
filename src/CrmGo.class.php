@@ -110,7 +110,7 @@ class CrmGo extends Crm {
 		$now =  date("Y-m-d G:i:s");
 		$set = "assignedId = $myUserId, lastTouch = '$now'";
 		$sql = "update crmContacts set $set where $cond";
-		$affected = $this->Mmodel->sql($sql);
+		$affected = $this->sql($sql);
 		$assignee = $this->userName($myUserId);
 		$assigner = $this->userName($userId);
 		$s = $affected == 1 ? "" : "s";
@@ -132,7 +132,7 @@ class CrmGo extends Crm {
 		$now =  date("Y-m-d G:i:s");
 		$set = "assignedId = $userId, lastTouch = '$now'";
 		$sql = "update crmContacts set $set where $cond $limit";
-		$affected = $this->Mmodel->sql($sql);
+		$affected = $this->sql($sql);
 		$assigner = $this->userName($myUserId);
 		$assignee = $this->userName($userId);
 		$s = $affected == 1 ? "" : "s";
@@ -309,7 +309,7 @@ class CrmGo extends Crm {
 			'passwd' => $passwd,
 			'role' => $manager ? "manager" : "user",
 		);
-		$this->Mmodel->dbInsert("users", $newUser);
+		$this->dbInsert("users", $newUser);
 		$this->redirect("/crmGo/users");
 	}
 	/*------------------------------------------------------------*/
@@ -508,7 +508,7 @@ class CrmGo extends Crm {
 			'contactId' => $contactId,
 			'tagId' => $tagId,
 		);
-		$this->Mmodel->dbInsert("crmContactTags", $crmContactTag);
+		$this->dbInsert("crmContactTags", $crmContactTag);
 		$this->redirect("/crmGo/contacts");
 	}
 	/*------------------------------*/
@@ -517,7 +517,7 @@ class CrmGo extends Crm {
 		$tagId = $_REQUEST['tagId'];
 		$cond = "contactId = $contactId and tagId = $tagId";
 		$sql = "delete from crmContactTags where $cond";
-		$this->Mmodel->sql($sql);
+		$this->sql($sql);
 		$this->redirect("/crmGo/contacts");
 	}
 	/*------------------------------------------------------------*/
@@ -537,7 +537,7 @@ class CrmGo extends Crm {
 		$contact = $_REQUEST;
 		$contact['assignedId'] = $this->userId;
 		$contact['lastTouch'] = date("Y-m-d G:i:s");
-		$contactId = $this->Mmodel->dbInsert("crmContacts", $contact);
+		$contactId = $this->dbInsert("crmContacts", $contact);
 		$this->redirect("/crmGo/contact?contactId=$contactId");
 	}
 	/*------------------------------------------------------------*/
@@ -557,7 +557,7 @@ class CrmGo extends Crm {
 			$data['quali2'] = $this->_qualiPhone($data['phone2'], $data['countryCode']);
 
 		$data['lastTouch'] = date("Y-m-d G:i:s");
-		$this->Mmodel->dbUpdate("crmContacts", $contactId, $data);
+		$this->dbUpdate("crmContacts", $contactId, $data);
 		$this->redirect("/crmGo/contact?contactId=$contactId");
 	}
 	/*------------------------------------------------------------*/
@@ -565,7 +565,7 @@ class CrmGo extends Crm {
 		$contactId = $_REQUEST['contactId'];
 		$priority = $_REQUEST['priority'];
 		$back = @$_REQUEST['back'];
-		$affected = $this->Mmodel->dbUpdate("crmContacts", $contactId, array(
+		$affected = $this->dbUpdate("crmContacts", $contactId, array(
 			'priority' => $priority,
 			'lastTouch' => date("Y-m-d G:i:s"),
 		));
@@ -619,7 +619,7 @@ class CrmGo extends Crm {
 				'epoc' => $now,
 				'answer' => $answer,
 			);
-			$this->Mmodel->dbInsert("crmRings", $crmRing);
+			$this->dbInsert("crmRings", $crmRing);
 			$this->touch($contactId);
 		}
 		$this->touchMe();
@@ -641,7 +641,7 @@ class CrmGo extends Crm {
 			$assignedId = $this->mgrId;
 		else
 			$assignedId = $_REQUEST['assignedId'];
-		$affected = $this->Mmodel->dbUpdate("crmContacts", $contactId, array(
+		$affected = $this->dbUpdate("crmContacts", $contactId, array(
 			'assignedId' => $assignedId,
 		));
 		if ( ! $affected ) {
@@ -696,7 +696,7 @@ class CrmGo extends Crm {
 				)
 			$this->Mview->error("New passwords are not the same");
 		if ( $settings ) {
-			$this->Mmodel->dbUpdate("users", $userId, $settings);
+			$this->dbUpdate("users", $userId, $settings);
 			$msg = "Updated";
 		} else {
 			$msg = "Nothing changed";
@@ -717,26 +717,22 @@ class CrmGo extends Crm {
 		}
 		$pu = parse_url($referer);
 		$url = trim($pu['path'], "/");
-		$id = $this->Mmodel->sql("select id from crmLandings where userId = '$userId'");
+		$id = $this->Mmodel->getInt("select id from crmLandings where userId = '$userId'");
 		if ( $url == "/" || $url == "/crm" ) {
 			if ( $id )
-				$this->Mmodel->dbDelete("landings", $id);
+				$this->dbDelete("crmLandings", $id);
 			$this->redirect("/crm");
 			return; // notreached
 		}
 		if ( $id )
-			$this->Mmodel->dbUpdate("crmLandings", $id, array(
+			$this->dbUpdate("crmLandings", $id, array(
 				'url' => $url,
 			));
 		else
-			$this->Mmodel->dbInsert("crmLandings", array(
+			$this->dbInsert("crmLandings", array(
 				'userId' => $userId,
 				'url' => $url,
 			));
-		Mview::tell("Landed", array(
-			'silent' => true,
-			'rememberForNextPage' => true,
-		));
 		$this->redirect($url);
 	}
 	/*------------------------------------------------------------*/
@@ -798,7 +794,7 @@ class CrmGo extends Crm {
 			'priority' => "urgent",
 			'lastTouch' => date("Y-m-d G:i:s"),
 		);
-		$id = $this->Mmodel->dbInsert("crmContacts", $crmContact);
+		$id = $this->dbInsert("crmContacts", $crmContact);
 		return($id != null);
 	}
 	/*------------------------------*/
@@ -889,7 +885,7 @@ class CrmGo extends Crm {
 	}
 	/*------------------------------------------------------------*/
 	private function _comment($contactId, $comment) {
-		$this->Mmodel->dbInsert("crmComments", array(
+		$this->dbInsert("crmComments", array(
 			'contactId' => $contactId,
 			'comment' => $comment,
 			'date' => date("Y-m-d"),
@@ -899,7 +895,7 @@ class CrmGo extends Crm {
 	}
 	/*------------------------------*/
 	private function touch($contactId) {
-		$this->Mmodel->dbUpdate("crmContacts", $contactId, array(
+		$this->dbUpdate("crmContacts", $contactId, array(
 			'lastTouch' => date("Y-m-d G:i:s"),
 		));
 	}
@@ -987,7 +983,7 @@ class CrmGo extends Crm {
 	}
 	/*------------------------------------------------------------*/
 	private function tommy($fname, $userId) {
-		$this->Mmodel->dbUpdate("users", $userId, array(
+		$this->dbUpdate("users", $userId, array(
 			$fname => time(),
 		));
 	}
