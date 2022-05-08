@@ -91,7 +91,7 @@ class Crm extends Mcontroller {
 		$sha1 = sha1($rnd);
 		$passwd = substr($sha1, 17, 6);
 		$dbPasswd = sha1($passwd);
-		$this->Mmodel->dbUpdate("users", $loginRow['id'], array(
+		$this->dbUpdate("users", $loginRow['id'], array(
 			'passwd' => $dbPasswd,
 		));
 		$m = new MmailJet;
@@ -138,13 +138,42 @@ class Crm extends Mcontroller {
 			return;
 		}
 		$newDbPasswd = sha1($newPasswd);
-		$this->Mmodel->dbUpdate("users", $loginRow['id'], array(
+		$this->dbUpdate("users", $loginRow['id'], array(
 			'passwd' => $newDbPasswd,
 		));
 		$this->Mview->msg("Password changed");
 	}
 	/*------------------------------------------------------------*/
 	/*------------------------------------------------------------*/
+	/*------------------------------------------------------------*/
+	protected function dbInsert($tableName, $data) {
+		if ( $this->loginEmail )
+			return($this->Mmodel->dbInsert($tableName, $data));
+		$this->Mview->msg("Not logged in. insert ignored");
+		return(null);
+	}
+	/*------------------------------*/
+	protected function dbUpdate($tableName, $id, $data) {
+		if ( $this->loginEmail )
+			return($this->Mmodel->dbUpdate($tableName, $id, $data));
+		$this->Mview->error("Not logged in. Update ignored");
+		return(null);
+	}
+	/*------------------------------*/
+	protected function dbDelete($tableName, $id) {
+		if ( $this->loginEmail )
+			return($this->Mmodel->dbDelete($tableName, $id));
+		$this->Mview->error("Not logged in. delete ignored");
+		return(null);
+	}
+	/*------------------------------*/
+	protected function sql($sql) {
+		if ( $this->loginEmail )
+			return($this->Mmodel->sql($sql));
+		$this->Mview->error("Not logged in. db change ignored");
+		return(null);
+		
+	}
 	/*------------------------------------------------------------*/
 	private function showMargins() {
 		$nots = array(
