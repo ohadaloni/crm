@@ -30,7 +30,8 @@ if ( isset($_REQUEST['logOut']) ) {
 } else {
 	$crmLogin->enterSession();
 }
-$crm = new Crm($startTime);
+$crm = new Crm;
+$crm->setStartTime($startTime);
 $crm->control();
 $Mview->flushOutput();
 /*------------------------------------------------------------*/
