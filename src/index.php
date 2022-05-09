@@ -5,6 +5,8 @@ require_once(M_DIR."/mfiles.php");
 require_once("crmFiles.php");
 require_once("Crm.class.php");
 /*------------------------------------------------------------*/
+$startTime = microtime(true);
+/*------------------------------------------------------------*/
 $ua = @$_SERVER['HTTP_USER_AGENT'];
 if (
 	! $ua
@@ -28,7 +30,7 @@ if ( isset($_REQUEST['logOut']) ) {
 } else {
 	$crmLogin->enterSession();
 }
-$crm = new Crm;
+$crm = new Crm($startTime);
 $crm->control();
 $Mview->flushOutput();
 /*------------------------------------------------------------*/
