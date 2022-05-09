@@ -11,8 +11,9 @@ class Crm extends Mcontroller {
 	/*------------------------------*/
 	private $startTime;
 	/*------------------------------------------------------------*/
-	public function __construct() {
+	public function __construct($startTime) {
 		parent::__construct();
+		$this->startTime = $startTime;
 
 		$topDir = dirname(__DIR__);
 		$logsDir = "$topDir/logs/crm";
@@ -41,7 +42,6 @@ class Crm extends Mcontroller {
 	}
 	/*------------------------------*/
 	protected function before() {
-		$this->startTime = microtime(true);
 		$this->Mview->assign(array(
 			'controller' => $this->controller,
 			'action' => $this->action,
