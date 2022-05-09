@@ -8,12 +8,9 @@ class Crm extends Mcontroller {
 	/*------------------------------*/
 	protected $logger;
 	protected $crmUtils;
-	/*------------------------------*/
-	private $startTime;
 	/*------------------------------------------------------------*/
-	public function __construct($startTime) {
+	public function __construct() {
 		parent::__construct();
-		$this->startTime = $startTime;
 
 		$topDir = dirname(__DIR__);
 		$logsDir = "$topDir/logs/crm";
@@ -61,7 +58,6 @@ class Crm extends Mcontroller {
 	protected function after() {
 		if ( ! $this->showMargins())
 			return;
-		$this->Mview->runningTime($this->startTime);
 		$this->Mview->showTpl("footer.tpl");
 		$this->Mview->showTpl("foot.tpl");
 	}
