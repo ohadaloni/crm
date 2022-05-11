@@ -20,18 +20,15 @@
 				border="0"
 				src="/images/edit.png"
 				title="Edit Contact"
-				alt="Edit Contact"
 			/></a>
 			{$contact.name} - {$contact.countryCode} - {$contact.phone}
 			{*****************}
 			{if $contact.quali == 1}
 				<img border="0" src="/images/thumbUp.png"
-					alt="{$contact.phone} is Qalified"
 					title="{$contact.phone} is Qalified"
 				/>
 			{else}
 				<img border="0" src="/images/thumbDown.png"
-					alt="{$contact.phone} is Not Qalified"
 					title="{$contact.phone} is Not Qalified"
 				/>
 			{/if}
@@ -42,12 +39,10 @@
 					{*****************}
 					{if $contact.quali2 == 1}
 						<img border="0" src="/images/thumbUp.png"
-							alt="{$contact.phone2} is Qalified"
 							title="{$contact.phone2} is Qalified"
 						/>
 					{else}
 						<img border="0" src="/images/thumbDown.png"
-							alt="{$contact.phone2} is Not Qalified"
 							title="{$contact.phone2} is Not Qalified"
 						/>
 					{/if}
@@ -162,13 +157,11 @@
 					<img border="0"
 						src="/images/thumbUp.png"
 						width="16" height="16"
-						alt="answered"
 						title="answered"
 					/>
 				{else}
 					<img border="0" src="/images/thumbDown.png"
 						width="16" height="16"
-						alt="no answer"
 						title="no answer"
 					/>
 				{/if}
