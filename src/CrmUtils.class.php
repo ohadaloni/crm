@@ -25,7 +25,7 @@ class CrmUtils extends Mcontroller {
 	/*------------------------------------------------------------*/
 	public static function tagName($tagId) {
 		global $Mmodel;
-		if (  ! $Mmodel )
+		if ( ! $Mmodel )
 			$Mmodel = new Mmodel;
 		if ( ! $tagId )
 			return("(?)");
