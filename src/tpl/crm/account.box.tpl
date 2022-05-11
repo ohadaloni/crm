@@ -2,7 +2,6 @@
 	Welcome {$loginEmail}:
 	<a href="/crmGo/settings"
 		title="Change Account Settings: password, email"
-		alt="Change Account Settings: password, email"
 	>Settings</a>,
 	{if $controller}
 		<a href="/crmGo/land"
