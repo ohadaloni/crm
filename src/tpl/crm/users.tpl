@@ -27,25 +27,21 @@
 					border="0"
 					src="/images/thumbDown.png"
 					title="Assign All contacts from {$user.loginEmail} to me ({$userId|userName})"
-					alt="Assign All contacts from {$user.loginEmail} to me ({$userId|userName})"
 				/></a>
 				<a href="/crmGo/bulkAssign?userId={$user.id}&howMany=7"><img
 					border="0"
 					src="/images/redCircle16x16.png"
 					title="Assign 7 contacts from me ({$userId|userName}) to {$user.loginEmail}"
-					alt="Assign 7 contacts from me ({$userId|userName}) to {$user.loginEmail}"
 				/></a>
 				<a href="/crmGo/bulkAssign?userId={$user.id}&howMany=100"><img
 					border="0"
 					src="/images/orangeCircle16x16.png"
 					title="Assign 100 contacts from me ({$userId|userName}}} to {$user.loginEmail}"
-					alt="Assign 100 contacts from me ({$userId|userName}}} to {$user.loginEmail}"
 				/></a>
 				<a href="/crmGo/bulkAssign?userId={$user.id}&howMany=1000"><img
 					border="0"
 					src="/images/greenCircle16x16.png"
 					title="Assign 1000 contacts from me ({$userId|userName}}} to {$user.loginEmail}"
-					alt="Assign 1000 contacts from me ({$userId|userName}}} to {$user.loginEmail}"
 				/></a>
 				({$user.id|numAssigned|number_format})
 			</td>
