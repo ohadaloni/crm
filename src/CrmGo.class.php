@@ -72,7 +72,7 @@ class CrmGo extends Crm {
 	/*------------------------------*/
 	public static function numAssigned($userId) {
 		global $Mmodel;
-		if (  ! $Mmodel )
+		if ( ! $Mmodel )
 			$Mmodel = new Mmodel;
 		$sql = "select count(*) from crmContacts where assignedId = $userId";
 		$numAssigned = $Mmodel->getInt($sql);
@@ -81,13 +81,13 @@ class CrmGo extends Crm {
 	/*------------------------------*/
 	public static function userName($userId, $truncate = null) {
 		global $Mmodel;
-		if (  ! $Mmodel )
+		if ( ! $Mmodel )
 			$Mmodel = new Mmodel;
 		if ( ! $userId )
 			return("(?)");
 		$sql = "select * from users where id = $userId";
 		$crmUser = $Mmodel->getRow($sql);
-		$name = @$crmUser['name'] ? $crmUser['name'] : @$crmUser['loginEmail'] ;
+		$name = @$crmUser['name'] ? $crmUser['name'] : @$crmUser['loginEmail'];
 		if ( $truncate !== null )
 			$name = substr($name, 0, $truncate);
 		return($name);
@@ -107,7 +107,7 @@ class CrmGo extends Crm {
 		$myUserId = $this->userId;
 		$userId = $_REQUEST['userId'];
 		$cond = "assignedId = $userId";
-		$now =  date("Y-m-d G:i:s");
+		$now = date("Y-m-d G:i:s");
 		$set = "assignedId = $myUserId, lastTouch = '$now'";
 		$sql = "update crmContacts set $set where $cond";
 		$affected = $this->sql($sql);
@@ -129,7 +129,7 @@ class CrmGo extends Crm {
 		$howMany = $_REQUEST['howMany'];
 		$cond = "assignedId = $myUserId";
 		$limit = "limit $howMany";
-		$now =  date("Y-m-d G:i:s");
+		$now = date("Y-m-d G:i:s");
 		$set = "assignedId = $userId, lastTouch = '$now'";
 		$sql = "update crmContacts set $set where $cond $limit";
 		$affected = $this->sql($sql);
@@ -551,9 +551,9 @@ class CrmGo extends Crm {
 			return;
 		}
 		$data = $_REQUEST;
-		if ( $data['phone'] && $data['countryCode']  )
+		if ( $data['phone'] && $data['countryCode'] )
 			$data['quali'] = $this->_qualiPhone($data['phone'], $data['countryCode']);
-		if ( $data['phone2'] && $data['countryCode']  )
+		if ( $data['phone2'] && $data['countryCode'] )
 			$data['quali2'] = $this->_qualiPhone($data['phone2'], $data['countryCode']);
 
 		$data['lastTouch'] = date("Y-m-d G:i:s");
@@ -812,7 +812,7 @@ class CrmGo extends Crm {
 		$lineNo = 1;
 		$loaded = 0;
 		foreach ( $lines as $line )
-			$loaded += $this->loadLine($line, $lineNo++) ? 1 : 0 ;
+			$loaded += $this->loadLine($line, $lineNo++) ? 1 : 0;
 		$numLines = count($lines);
 		$this->Mview->msg("$numLines lines, $loaded loaded");
 	}
@@ -922,10 +922,10 @@ class CrmGo extends Crm {
 		$orgCond = $this->orgCond();
 		$meCond = "id = $userId";
 		$myCond = "mgrId = $userId";
-		$myMgrCond = $mgrId ? "mgrId = $mgrId" : "false" ;
-		$notMyMgrCond = $mgrId ? "id != $mgrId" : "false" ;
+		$myMgrCond = $mgrId ? "mgrId = $mgrId" : "false";
+		$notMyMgrCond = $mgrId ? "id != $mgrId" : "false";
 		$mgrsCond = "(role = 'manager' or role = 'accountManager')";
-		switch (  $role ) {
+		switch ( $role ) {
 			case 'accountManager' :
 					$cond = "$orgCond";
 				break;
@@ -954,7 +954,7 @@ class CrmGo extends Crm {
 		$myUserId = $this->userId;
 		$userIdCond = $userId ? "assignedId = $userId" : null;
 		$role = $this->role;
-		switch (  $role ) {
+		switch ( $role ) {
 			case 'user' :
 				$myUserIdCond = "assignedId = $myUserId";
 				return($myUserIdCond);
@@ -998,7 +998,7 @@ class CrmGo extends Crm {
 		$this->tommy('lastFelt', $userId);
 	}
 	/*------------------------------*/
-	// user did something  - is active
+	// user did something - is active
 	private function touchMe() {
 		$this->tommy('lastTouched', $this->userId);
 	}
