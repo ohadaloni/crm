@@ -6,7 +6,6 @@
 				width="16" height="16"
 				src="/images/campaign.png"
 				title="campaign"
-				alt="campaign"
 			/>
 		</td>
 		{foreach from=$campaigns item=campaign}
