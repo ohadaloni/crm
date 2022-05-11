@@ -6,7 +6,6 @@
 				width="16" height="16"
 				src="/images/traffic.png"
 				title="trafficSource"
-				alt="trafficSource"
 			/>
 		</td>
 		{foreach from=$trafficSources item=trafficSource}
