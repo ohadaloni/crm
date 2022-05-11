@@ -104,7 +104,7 @@ class Crm extends Mcontroller {
 	}
 	/*------------------------------------------------------------*/
 	public function changePasswd() {
-		$this->Mview->showTpl("admin/changePasswd.tpl",  array(
+		$this->Mview->showTpl("admin/changePasswd.tpl", array(
 			'loginEmail' => $this->loginEmail,
 		));
 	}
